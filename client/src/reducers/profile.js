@@ -41,10 +41,13 @@ export default function (state = initialState, action) {
       };
     case CLEAR_PROFILE:
       return {
+        // ...state,
+        // profile: null,
+        // repos: [],
+        // loading: false,
         ...state,
         profile: null,
         repos: [],
-        loading: false,
       };
     case GET_REPOS:
       return {

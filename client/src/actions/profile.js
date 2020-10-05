@@ -46,10 +46,7 @@ export const getProfiles = () => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
-      payload: {
-        msg: err.response.statusText,
-        status: err.response.status,
-      },
+      payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
 };
@@ -57,7 +54,7 @@ export const getProfiles = () => async (dispatch) => {
 // Get profile by ID
 export const getProfileById = (userId) => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/profile/${userId}`);
+    const res = await axios.get(`/api/profile/user/${userId}`);
 
     dispatch({
       type: GET_PROFILE,
@@ -66,16 +63,13 @@ export const getProfileById = (userId) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
-      payload: {
-        msg: err.response.statusText,
-        status: err.response.status,
-      },
+      payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
 };
 
 // Get github repos
-export const getRepos = (username) => async (dispatch) => {
+export const getGithubRepos = (username) => async (dispatch) => {
   try {
     const res = await axios.get(`/api/profile/github/${username}`);
 
@@ -252,7 +246,7 @@ export const deleteEducation = (id) => async (dispatch) => {
 export const deleteAccount = () => async (dispatch) => {
   if (window.confirm('Are you sure? This can NOT be undone!')) {
     try {
-      const res = await axios.delete('/api/profile');
+      await axios.delete('/api/profile');
 
       dispatch({ type: CLEAR_PROFILE });
       dispatch({ type: ACCOUNT_DELETED });

@@ -4,7 +4,7 @@ const auth = require('../../middleware/auth');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const { body, validationResult } = require('express-validator');
+const { check, validationResult } = require('express-validator');
 
 //Case Sensitive
 
@@ -29,8 +29,8 @@ router.get('/', auth, async (req, res) => {
 router.post(
   '/',
   [
-    body('email', 'Please include a valid Email').isEmail(),
-    body('password', 'Password is required').exists(),
+    check('email', 'Please include a valid Email').isEmail(),
+    check('password', 'Password is required').exists(),
   ],
 
   async (req, res) => {

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { body, validationResult } = require('express-validator');
+const { check, validationResult } = require('express-validator');
 const auth = require('../../middleware/auth');
 const User = require('../../models/User');
 const Profile = require('../../models/Profile');
@@ -13,7 +13,7 @@ const Post = require('../../models/Post');
 //  @access      private
 router.post(
   '/',
-  [auth, [body('text', 'Text is required').not().isEmpty()]],
+  [auth, [check('text', 'Text is required').not().isEmpty()]],
   async (req, res) => {
     //Send errors array from validationResult framework. errors defined by second paramater passed into body (see above)
     const errors = validationResult(req);
@@ -178,7 +178,7 @@ router.put('/unlike/:id', auth, async (req, res) => {
 //  @access      private
 router.post(
   '/comment/:id',
-  [auth, [body('text', 'Text is required').not().isEmpty()]],
+  [auth, [check('text', 'Text is required').not().isEmpty()]],
   async (req, res) => {
     //Send errors array from validationResult framework. errors defined by second paramater passed into body (see above)
     const errors = validationResult(req);
